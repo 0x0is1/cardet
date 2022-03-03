@@ -9,7 +9,7 @@ Access formal Vehicle details by it's number plate. [CLI Tool](./main.py) and [P
 
 ### Installation
 
-```
+```css
 $ git clone https://github.com/0x0is1/cardet
 $ cd cardet
 $ python -m pip install -r requirements.txt --user
@@ -17,7 +17,7 @@ $ python -m pip install -r requirements.txt --user
 
 ### Run
 
-```
+```css
 $ cd cardet
 $ python main.py
 ```
@@ -28,6 +28,10 @@ $ python main.py
 * Requests
 * BeautifulSoup4
 * Urllib3
+
+### Sample Preview
+
+![preview-1](./previews/preview-1.png)
 
 ## Disclaimer
 
