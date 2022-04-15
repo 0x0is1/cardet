@@ -1,4 +1,4 @@
-import requests, bs4, base64
+import requests, bs4, base64, time
 
 # URL encoded to base64 to avoid illegal api usage backtracing
 BASE_URL = base64.b64decode("aHR0cHM6Ly92YWhhbmluZm9zLmNvbQ==").decode('utf-8')
@@ -31,7 +31,7 @@ def xml2json(response):
         formatted_data[j[0].text] = j[2].text
     return formatted_data
 
-def get_details(vehicle_number, max_retry=15):
+def get_details(vehicle_number, max_retry=30):
     phcid_cook, access_token = get_cookie_token()
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -47,9 +47,9 @@ def get_details(vehicle_number, max_retry=15):
         response = requests.post(url=url, headers=headers, data=data, verify=False)
         if '<tr><td>Registration Number</td><td>:</td><td>R</td></tr>' in str(response.content):
             print(f"{tmcolors.WARNING}[!] Fetching failed. Retrying...({i}/{max_retry}){tmcolors.ENDC}")
-
+            time.sleep(5)
             if i >= max_retry:
-                print("{tmcolors.FAIL}[-] Unable to find it in database. Recheck arguements or Retry later.{tmcolors.ENDC}")
+                print(f"{tmcolors.FAIL}[-] Unable to find it in database. Recheck arguements or Retry later\nOr try using a VPN.{tmcolors.ENDC}")
                 break
             
             continue
